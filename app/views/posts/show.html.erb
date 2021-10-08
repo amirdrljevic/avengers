@@ -1,23 +1,15 @@
-<p id="notice"><%= notice %></p>
-
-  <div class="row g-5">
-    <div class="col-md-8">
-
-      <article class="blog-post">
-        <h2 class="blog-post-title"><%= @post.title %></h2>
-        <p class="blog-post-meta"><i><%= @post.created_at.strftime("%_d. %B %Y.") %> <br/><a href="#">Amir</a> </i></p>
-        <hr>
-        <p><%= @post.description %></p>
-
-        
-      </article>
-
-
-      <nav class="blog-pagination" aria-label="Pagination">
+<div class="row g-5">
+  <div class="col-md-8">
+    <article class="blog-post">
+      <h2 class="blog-post-title"><%= @post.title %></h2>
+      <p class="blog-post-meta"><i><%= @post.created_at.strftime("%_d. %B %Y.") %> <br/><a href="#">Amir</a> </i></p>
+      <hr>
+      <p><%= @post.description %></p>      
+    </article>
+    <nav class="blog-pagination" aria-label="Pagination">
       <%= link_to 'Edit', edit_post_path(@post), class: "btn btn-outline-primary" %> 
-      <%= link_to 'Back', posts_path, class: "btn btn-outline-secondary" %>
-        
-      </nav>
-
-    </div>
+      <%= link_to 'Back', posts_path, class: "btn btn-outline-secondary" %>        
+    </nav>
+  </div>
+</div>
 

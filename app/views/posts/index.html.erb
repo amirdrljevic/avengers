@@ -1,6 +1,5 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Posts</h1>
+<% if user_signed_in? %>
+  <h1>Posts</h1>
 
   <div class="row mb-2">
     <% @posts.each do |post| %>
@@ -20,7 +19,20 @@
     </div>    
     <% end %>    
   </div>
-
-<br>
-
-<%= link_to 'New Post', new_post_path %>
+  <br>
+  <%= link_to 'New Post', new_post_path %>
+<% else %>
+  <div class="card text-center">
+    <div class="card-header">
+      <h1>Avengers App</h1>
+    </div>
+    <div class="card-body">
+      <p class="card-text">This is a simple app made in Ruby on Rails with Bootstrap.</p>
+      You don't have account? <%= link_to 'Sign up', new_user_registration_path %>
+      <p> If you already have account here, then simply <%= link_to 'Log in', new_user_session_path %></p>
+    </div>
+    <div class="card-footer text-muted">
+      <%= link_to 'Amir Drljevic', 'https://www.linkedin.com/in/amirdrljevic', target: :blank %>
+    </div>
+  </div>
+<% end %>
