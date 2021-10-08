@@ -2,12 +2,14 @@
   <div class="col-md-8">
     <article class="blog-post">
       <h2 class="blog-post-title"><%= @post.title %></h2>
-      <p class="blog-post-meta"><i><%= @post.created_at.strftime("%_d. %B %Y.") %> <br/><a href="#">Amir</a> </i></p>
+      <p class="blog-post-meta"><i><%= @post.created_at.strftime("%_d. %B %Y.") %> <br/><%= @post.user.first_name + ' ' + @post.user.last_name %> </i></p>
       <hr>
       <p><%= @post.description %></p>      
     </article>
     <nav class="blog-pagination" aria-label="Pagination">
+    <% if @post.user == current_user %>
       <%= link_to 'Edit', edit_post_path(@post), class: "btn btn-outline-primary" %> 
+    <% end %>
       <%= link_to 'Back', posts_path, class: "btn btn-outline-secondary" %>        
     </nav>
   </div>

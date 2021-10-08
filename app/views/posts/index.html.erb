@@ -8,12 +8,14 @@
         <div class="col p-4 d-flex flex-column position-static">
           <h3 class="mb-0"><%= link_to post.title, post, class: "no_style_link" %></h3>
           <div class="mb-1 text-muted"><%= post.created_at.strftime("%_d. %B %Y.") %></div>
-          <p class="card-text mb-auto"><i>Comments number</i></p>
-
-          <div class="d-flex flex-row bd-highlight mb-3">
-            <div class="p-2 bd-highlight"><%= link_to 'Edit', edit_post_path(post), class: "btn btn-secondary" %> </div>
-            <div class="p-2 bd-highlight"><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } , class: "btn btn-secondary" %></div>
-          </div>
+          <p class="card-text mb-auto">Author: <%= post.user.first_name + ' ' + post.user.last_name %></p>
+          <p><small><i>Comments number</small></i></p>
+          <% if post.user == current_user %>
+            <div class="d-flex flex-row bd-highlight">
+              <div class="p-2 bd-highlight"><%= link_to 'Edit', edit_post_path(post), class: "btn btn-secondary" %> </div>
+              <div class="p-2 bd-highlight"><%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' } , class: "btn btn-secondary" %></div>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>    
