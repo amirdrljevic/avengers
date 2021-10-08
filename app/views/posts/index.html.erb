@@ -1,6 +1,12 @@
 <% if user_signed_in? %>
   <h1>Posts</h1>
 
+  <div class="digg_pagination">
+    <div class="page_info">
+      <%= page_entries_info @posts %>
+    </div>
+    <%= will_paginate @posts, :container => true %>
+  </div>
   <div class="row mb-2">
     <% @posts.each do |post| %>
     <div class="col-md-6">

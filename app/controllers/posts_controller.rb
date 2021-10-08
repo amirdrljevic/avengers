@@ -3,7 +3,9 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
-    @posts = Post.all
+    #@posts = Post.all
+    #@posts = Post.paginate(:page => params[:page], :per_page => 10)
+    @posts = Post.paginate(page: params[:page], per_page: 2)
     #@posts = current_user.posts.load if user_signed_in?
   end
 
