@@ -1,31 +1,32 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
+  before_action :check_for_comments, only: [:destroy]
 
-  # GET /posts or /posts.json
   def index
-    #@posts = Post.all
-    #@posts = Post.paginate(:page => params[:page], :per_page => 10)
-    @posts = Post.paginate(page: params[:page], per_page: 2)
-    #@posts = current_user.posts.load if user_signed_in?
+    if params[:my_posts]&.present? && params[:my_posts] == "true" 
+      @posts = current_user.posts.includes(:comments).paginate(page: params[:page], per_page: 2)
+    else
+      @posts = Post.includes(:comments).paginate(page: params[:page], per_page: 2)
+    end
   end
 
-  # GET /posts/1 or /posts/1.json
   def show
+    @post = Post.find(params[:id])
+    @posts = Post.limit(7).order('id desc') #to populate the sidebar
+    @comment = @post.comments.build
+    @comment.user = current_user
+    @comments = @post.comments.paginate(page: params[:page], per_page: 3)
   end
 
-  # GET /posts/new
   def new
     @post = current_user.posts.build
   end
 
-  # GET /posts/1/edit
   def edit
   end
 
-  # POST /posts or /posts.json
   def create
     @post = current_user.posts.build(post_params)
-    #@post = Post.new(post_params)
 
     respond_to do |format|
       if @post.save
@@ -69,5 +70,14 @@ class PostsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def post_params
       params.require(:post).permit(:title, :description)
+    end
+
+    def check_for_comments
+      if @post.comments.any?
+        respond_to do |format|
+          format.html { redirect_to @post, notice: "You cannot delete post with comments. Delete comments first." }
+          format.json { head :no_content }
+        end
+      end
     end
 end

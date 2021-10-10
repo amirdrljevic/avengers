@@ -2,6 +2,11 @@ Rails.application.routes.draw do
   devise_for :users
   get 'home/index'
   root 'posts#index'
-  resources :posts
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+  # a custom path for my posts  action
+  #get '/my_posts' => 'posts#my_posts', :as => :my_posts
+
+  resources :posts do
+    resources :comments
+  end
 end

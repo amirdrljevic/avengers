@@ -20,3 +20,12 @@
       user.posts.create!(title: title, 
                          description: description)}
   end
+
+  # Generate comments for some posts
+  posts = Post.order(:created_at).take(10)
+  5.times do 
+    content = Faker::Lorem.sentence(word_count: 5)
+    posts.each { |post| post.comments.create!(user_id: 1,
+                                              post_id: post,
+                                              comment: content) }
+  end

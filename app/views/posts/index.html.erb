@@ -14,7 +14,7 @@
         <h3 class="mb-0"><%= link_to post.title, post, class: "no_style_link" %></h3>
         <div class="mb-1 text-muted"><%= post.created_at.strftime("%_d. %B %Y.") %></div>
         <p class="card-text mb-auto">Author: <%= post.user.first_name + ' ' + post.user.last_name %></p>
-        <p><small><i>Comments number</small></i></p>
+        <p><small><i><%= pluralize(post.comments.count, "comment") %></small></i></p>
         <% if post.user == current_user %>
           <div class="d-flex flex-row bd-highlight">
             <div class="p-2 bd-highlight"><%= link_to 'Edit', edit_post_path(post), class: "btn btn-secondary" %> </div>
