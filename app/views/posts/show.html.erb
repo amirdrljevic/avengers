@@ -6,12 +6,44 @@
       <hr>
       <p><%= @post.description %></p>      
     </article>
+    <div class="row">
+      <aside class="col-md-8">
+        <section class="comment_form">
+          <%= render 'comments/comment_form' %>
+        </section>
+      </aside>
+    </div>
+    <div class="col-md-8">
+      <% if @post.comments.any? %>
+      <hr>      
+        <h5><%= pluralize(@post.comments.count, "comment") %></h5>
+        <ol class="comments">
+          <%= render @comments %>
+        </ol>
+        <div class="digg_pagination">
+          <%= will_paginate @comments, :container => true %>
+        </div>
+      <% end %>
+    </div>
     <nav class="blog-pagination" aria-label="Pagination">
     <% if @post.user == current_user %>
       <%= link_to 'Edit', edit_post_path(@post), class: "btn btn-outline-primary" %> 
     <% end %>
       <%= link_to 'Back', posts_path, class: "btn btn-outline-secondary" %>        
     </nav>
+  </div>
+  <div class="col-md-4">
+    <h4>Most recent posts</h4>
+    <% @posts.each do |post| %>
+      <div class="card sidebar_card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title"><%= post.title %></h5>
+          <span><i><%= post.created_at.strftime("%_d. %B %Y.") %></i> </span>
+          <p class="card-text"><%= truncate(post.description, :length => 70) %></p>
+          <%= link_to 'Visit post', post, class: "btn btn-secondary" %>          
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>
 
