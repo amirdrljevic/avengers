@@ -22,6 +22,7 @@ To get this app up and running on your local machine you need to have POSTGRESQL
 * `rails db:setup`   - to create the database
 * `rails db:migrate` - create the models,
 * `rails db:seed`    - seed the database
+
 and you are ready to go. 
 
 Notes:
