@@ -1,9 +1,9 @@
 # AVENGERS APP
 
-This a simple app that contains the following: 
+This is a simple app that contains the following: 
 * Users can register. 
 * Users can create a post, 
-* Users can comment on their own or another user’s posts.
+* Users can comment on their own or other user’s posts.
 * User can edit his/her user profile or delete the account. 
 * Also, a guest may browse posts, view them and read comments, but if a guest tries to comment on a post, they will be prompted to login or register.
 * Users can see all posts but only are able to edit or delete their own posts, not others.
@@ -18,10 +18,11 @@ http://amird-avengers.herokuapp.com/
 
 To get this app up and running on your local machine you need to have POSTGRESQL installed and then run the following commands:
 
-* `bundle install` - to install the dependencies, 
-* `rails db:setup` - to create the database
+* `bundle install`   - to install the dependencies, 
+* `rails db:setup`   - to create the database
 * `rails db:migrate` - create the models,
-* `rails db:seed` - seed the database
+* `rails db:seed`    - seed the database
+
 and you are ready to go. 
 
 Notes:
